@@ -1,2 +1,4 @@
 /target
 /logs
+/frontend/dist
+/backend/dist
