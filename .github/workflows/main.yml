@@ -31,5 +31,5 @@ jobs:
 
       - run: cargo test --manifest-path backend/Cargo.toml
       - run: cargo test --manifest-path frontend/Cargo.toml
-      - run: cd frontend && wasm-pack test --headless --chrome
-      - run: cd frontend && wasm-pack test --headless --firefox
+      - run: cd frontend && wasm-pack test --chrome
+      - run: cd frontend && wasm-pack test --firefox
