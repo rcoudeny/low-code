@@ -1,1 +1,1 @@
-pub mod tabstrip;
+pub mod tabstrip_component;

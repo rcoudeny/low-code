@@ -18,3 +18,10 @@ yew = { version = "0.20.0", features = ["csr"] }
 yewdux = "0.9.3"
 common = { version="0.1.0", path = "../common"}
 gloo-console = "0.2.3"
+async-std = "1.10.0"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.0"
+
+[target.wasm32-unknown-unknown]
+runner = "webassembly-test-runner"

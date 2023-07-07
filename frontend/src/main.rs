@@ -4,31 +4,32 @@ mod store;
 
 // use store::Store;
 use yew::prelude::*;
-use yewdux::prelude::*;
 
 use crate::components::{
-    common::tabstrip::{TabInfo, TabStrip},
-    pagetest::PageTest,
+    common::tabstrip_component::{TabInfo, TabStrip},
+    datatype::datatype_component::DataType,
+    form::{form_component::Form, form_editor_component::FormEditor},
 };
 
 #[function_component]
-fn App() -> Html {
+fn HyphenApp() -> Html {
     // let (store, _) = use_store::<Store>();
 
     html! {
              <div>
-        <TabStrip tabs={vec![ TabInfo { display_text: "Data type" .to_string(), component: html! {<PageTest
-            test="Wa is dees?" />}
+        <TabStrip tabs={vec![ TabInfo {
+            display_text: "Data type" .to_string(),
+            component: html! {<DataType />}
         },
         TabInfo {
         display_text: "Formulier".to_string(),
         component: html! {
-        <PageTest test="Jajaja wi" />}
+        <FormEditor/>}
         },
         TabInfo {
         display_text: "Result".to_string(),
         component: html! {
-        <PageTest test="Wajow tis waar" />}
+        <Form />}
         },
         ]}/>
     </div>
@@ -36,5 +37,5 @@ fn App() -> Html {
 }
 
 fn main() {
-    yew::Renderer::<App>::new().render();
+    yew::Renderer::<HyphenApp>::new().render();
 }
