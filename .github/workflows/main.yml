@@ -11,6 +11,9 @@ jobs:
       - name: Install
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
+      - name: Install Trunk
+        run: cargo install trunk
+
       - name: Cache cargo registry
         uses: actions/cache@v2
         with:
@@ -29,7 +32,24 @@ jobs:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
 
-      - run: cargo test --manifest-path backend/Cargo.toml
-      - run: cargo test --manifest-path frontend/Cargo.toml
-      - run: cd frontend && wasm-pack test --chrome
-      - run: cd frontend && wasm-pack test --firefox
+      - name: Backend tests
+        run: cargo test --manifest-path backend/Cargo.toml
+
+      - name: Frontend tests
+        run: cargo test --manifest-path frontend/Cargo.toml
+
+      - name: Build and serve the application
+        run: |
+          cd frontend
+          trunk build
+          trunk serve --port 3000 &
+        env:
+          SERVER_PID: $!
+
+      - name: Run Wasm-pack tests on build application
+        run: wasm-pack test --headless --chrome --firefox
+        env:
+          SERVER_PID: ${{ env.SERVER_PID }}
+
+      - name: Stop server
+        run: kill ${{ env.SERVER_PID }}
