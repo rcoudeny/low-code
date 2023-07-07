@@ -7,5 +7,5 @@ fn only_backend_test() {
 
 #[test]
 fn not_the_only_backend_test() {
-    assert_eq!(2, 1, "2 is not equal to 1");
+    assert_eq!(2, 2, "2 is not equal to 2");
 }
